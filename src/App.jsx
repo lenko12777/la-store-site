@@ -26,7 +26,7 @@ const scrollToTop = () => {
   });
 };
 
-const HERO_VIDEO_URL = "https://res.cloudinary.com/dwhdnp0rl/video/upload/v1782642247/IMG_1275_ooocde.mp4";
+const HERO_VIDEO_URL = "https://res.cloudinary.com/dwhdnp0rl/video/upload/so_50p,vc_h264,q_100,br_8000k/v1782642247/IMG_1275_ooocde.mp4";
 
 const LINKS = {
   tiktok:    "https://www.tiktok.com/@la_store1_?is_from_webapp=1&sender_device=pc",
@@ -1263,9 +1263,10 @@ export default function App() {
         <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}><div style={{ position: "absolute", top: 0, bottom: 0, width: "40%", background: "linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent)", animation: "sheen 9s ease-in-out infinite" }} /></div>
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(120% 80% at 50% 20%, transparent 30%, rgba(0,0,0,.65) 100%), linear-gradient(to top, rgba(0,0,0,.85), transparent 55%)" }} />
         <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end", textAlign: "center", padding: "0 20px 54px" }}>
-          <h1 className="disp js-reveal" style={{ margin: 0, fontSize: "clamp(30px,7.5vw,46px)", color: "#fff", letterSpacing: "-.02em" }}>{t.newIn}</h1>
-          <p className="js-reveal" style={{ margin: "14px 0 0", color: "rgba(255,255,255,.8)", fontSize: "clamp(12.5px,3.2vw,14px)", letterSpacing: ".18em", textTransform: "uppercase", fontWeight: 500 }}>Luxury streetwear · Worldwide delivery</p>
-          <button onClick={toShop} className="cta js-reveal" style={{ marginTop: 24, padding: "17px 36px", borderRadius: 99, fontWeight: 800, fontSize: "clamp(14px,3.8vw,16px)", letterSpacing: ".06em", border: "none", background: "#fff", color: "#000", cursor: "pointer", whiteSpace: "nowrap" }}>{t.heroCta}</button>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 14 }}>
+            <button onClick={toShop} className="cta js-reveal" style={{ padding: "17px 36px", borderRadius: 99, fontWeight: 800, fontSize: "clamp(14px,3.8vw,16px)", letterSpacing: ".06em", border: "none", background: "#fff", color: "#000", cursor: "pointer", whiteSpace: "nowrap" }}>{t.heroCta}</button>
+            <button onClick={() => { setCategory("Під замовлення"); setTimeout(toShop, 60); }} className="cta js-reveal" style={{ padding: "17px 36px", borderRadius: 99, fontWeight: 800, fontSize: "clamp(14px,3.8vw,16px)", letterSpacing: ".06em", border: "2px solid rgba(255,255,255,.85)", background: "transparent", color: "#fff", cursor: "pointer", whiteSpace: "nowrap" }}>ПІД ЗАМОВЛЕННЯ</button>
+          </div>
         </div>
       </section>
 
