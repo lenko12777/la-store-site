@@ -83,7 +83,7 @@ const T = {
     newIn: "Новинки", heroCta: "ПЕРЕГЛЯНУТИ НАЯВНІСТЬ",
     catalog: "Всі товари", loading: "Завантаження...", all: "Всі", showAll: "Показати все",
     notFound: "Нічого не знайдено", reset: "Скинути фільтри", loadErr: "Не вдалося завантажити товари. Перевірте з'єднання і оновіть сторінку.",
-    inStock: "В наявності", outStock: "Немає", addToCart: "Додати в кошик", addShort: "В кошик",
+    inStock: "Актуально", outStock: "Неактуально", addToCart: "Додати в кошик", addShort: "В кошик",
     soldOut: "Немає в наявності", cart: "Кошик", cartEmpty: "Кошик порожній", total: "Разом",
     checkout: "Оформити замовлення", searchPh: "Пошук товарів, брендів...", popular: "Популярні бренди",
     nothingFor: "Нічого не знайдено за", reviewsTitle: "Відгуки наших клієнтів", allReviews: "Усі відгуки можна переглянути в Telegram",
@@ -119,7 +119,7 @@ const T = {
     newIn: "New In", heroCta: "VIEW AVAILABILITY",
     catalog: "All Products", loading: "Loading...", all: "All", showAll: "Show all",
     notFound: "Nothing found", reset: "Reset filters", loadErr: "Couldn't load products. Check your connection and refresh the page.",
-    inStock: "In stock", outStock: "Sold out", addToCart: "Add to cart", addShort: "Add",
+    inStock: "Actual", outStock: "Sold", addToCart: "Add to cart", addShort: "Add",
     soldOut: "Sold out", cart: "Cart", cartEmpty: "Your cart is empty", total: "Total",
     checkout: "Checkout", searchPh: "Search products, brands...", popular: "Popular brands",
     nothingFor: "No results for", reviewsTitle: "Customer reviews", allReviews: "Tap to view all reviews on Telegram",
@@ -300,7 +300,7 @@ const mapAirtableRecord = (rec, rowIndex) => {
   const price = typeof priceRaw === "number" ? priceRaw : parseFloat(String(priceRaw ?? "0").replace(/[^\d.]/g, "")) || 0;
 
   const statusRaw = String(f["Статус"] ?? "").toLowerCase();
-  const in_stock = statusRaw ? (statusRaw.includes("in stock") || statusRaw.includes("наявн")) : true;
+  const in_stock = statusRaw ? (statusRaw.includes("in stock") || statusRaw.includes("наявн") || statusRaw.includes("актуальн")) && !statusRaw.includes("sold") && !statusRaw.includes("неактуальн") : true;
 
   let sizes = f["Розміри"];
   if (Array.isArray(sizes)) sizes = sizes.map((s) => String(s).trim()).filter(Boolean);
@@ -1264,8 +1264,8 @@ export default function App() {
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(120% 80% at 50% 20%, transparent 30%, rgba(0,0,0,.65) 100%), linear-gradient(to top, rgba(0,0,0,.85), transparent 55%)" }} />
         <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end", textAlign: "center", padding: "0 20px 54px" }}>
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 14 }}>
-            <button onClick={toShop} className="cta js-reveal" style={{ padding: "17px 36px", borderRadius: 99, fontWeight: 800, fontSize: "clamp(14px,3.8vw,16px)", letterSpacing: ".06em", border: "none", background: "#fff", color: "#000", cursor: "pointer", whiteSpace: "nowrap" }}>{t.heroCta}</button>
-            <button onClick={() => { setCategory("Під замовлення"); setTimeout(toShop, 60); }} className="cta js-reveal" style={{ padding: "17px 36px", borderRadius: 99, fontWeight: 800, fontSize: "clamp(14px,3.8vw,16px)", letterSpacing: ".06em", border: "2px solid rgba(255,255,255,.85)", background: "transparent", color: "#fff", cursor: "pointer", whiteSpace: "nowrap" }}>ПІД ЗАМОВЛЕННЯ</button>
+            <button onClick={() => { setCategory("Наявність"); setSort("dateNew"); setTimeout(toShop, 60); }} className="cta js-reveal" style={{ padding: "17px 36px", borderRadius: 99, fontWeight: 800, fontSize: "clamp(14px,3.8vw,16px)", letterSpacing: ".06em", border: "none", background: "#fff", color: "#000", cursor: "pointer", whiteSpace: "nowrap" }}>{t.heroCta}</button>
+            <button onClick={() => { setCategory("Під замовлення"); setSort("dateNew"); setTimeout(toShop, 60); }} className="cta js-reveal" style={{ padding: "17px 36px", borderRadius: 99, fontWeight: 800, fontSize: "clamp(14px,3.8vw,16px)", letterSpacing: ".06em", border: "2px solid rgba(255,255,255,.85)", background: "transparent", color: "#fff", cursor: "pointer", whiteSpace: "nowrap" }}>ПІД ЗАМОВЛЕННЯ</button>
           </div>
         </div>
       </section>
