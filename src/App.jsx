@@ -26,7 +26,7 @@ const scrollToTop = () => {
   });
 };
 
-const HERO_VIDEO_URL = "https://res.cloudinary.com/dwhdnp0rl/video/upload/so_50p/v1782642247/IMG_1275_ooocde.mp4";
+const HERO_VIDEO_URL = "https://res.cloudinary.com/dwhdnp0rl/video/upload/v1782642247/IMG_1275_ooocde.mp4";
 
 const LINKS = {
   tiktok:    "https://www.tiktok.com/@la_store1_?is_from_webapp=1&sender_device=pc",
