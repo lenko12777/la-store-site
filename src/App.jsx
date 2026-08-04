@@ -26,7 +26,7 @@ const scrollToTop = () => {
   });
 };
 
-const HERO_VIDEO_URL = "https://res.cloudinary.com/dwhdnp0rl/video/upload/so_50p,q_100/v1782642247/IMG_1275_ooocde.mp4";
+const HERO_VIDEO_URL = "https://res.cloudinary.com/dwhdnp0rl/video/upload/so_50p/v1782642247/IMG_1275_ooocde.mp4";
 
 const LINKS = {
   tiktok:    "https://www.tiktok.com/@la_store1_?is_from_webapp=1&sender_device=pc",
@@ -50,8 +50,8 @@ const SENDER_EMAIL = "lastore6767@gmail.com";
 //   Example: const MARQUEE = ["https://res.cloudinary.com/.../1.jpg", "...2.jpg"];
 //   (placeholders below until you send the photos)
 const MARQUEE_IMAGES = [
-  "https://res.cloudinary.com/dwhdnp0rl/image/upload/f_auto,q_auto,w_420,h_560,c_fill,g_auto/v1785753372/IMG_3032_cqgame.jpg",
   "https://res.cloudinary.com/dwhdnp0rl/image/upload/f_auto,q_auto,w_420,h_560,c_fill,g_auto/v1785753373/IMG_3994_vy3pne.jpg",
+  "https://res.cloudinary.com/dwhdnp0rl/image/upload/f_auto,q_auto,w_420,h_560,c_fill,g_auto/v1785753372/IMG_3032_cqgame.jpg",
   "https://res.cloudinary.com/dwhdnp0rl/image/upload/f_auto,q_auto,w_420,h_560,c_fill,g_auto/v1785753390/IMG_5810_eauazv.jpg",
   "https://res.cloudinary.com/dwhdnp0rl/image/upload/f_auto,q_auto,w_420,h_560,c_fill,g_auto/v1785753373/IMG_1431_esgluv.heic",
   "https://res.cloudinary.com/dwhdnp0rl/image/upload/f_auto,q_auto,w_420,h_560,c_fill,g_auto/v1785753374/IMG_4255_a9qk8u.heic",
@@ -476,7 +476,7 @@ function HeroVideo({ src }) {
   if (!src) return null;
   return (
     <>
-      <video ref={ref} autoPlay muted loop playsInline preload="auto"
+      <video ref={ref} autoPlay muted loop playsInline preload="auto" fetchPriority="high"
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: ready ? 1 : 0, transition: "opacity .4s ease" }}>
         <source src={src} type="video/mp4" />
       </video>
@@ -949,8 +949,8 @@ function Footer({ t, lang, setLang, onQuickLink, onInfoLink }) {
           </div>
           <div><div style={{ fontWeight: 700, fontSize: 14, marginBottom: 14 }}>{t.quickLinks}</div>
             <div className="footer-links-row">
-              {[...CATEGORIES.map((c) => ({ key: c, label: t.cat[c] })), { key: null, label: t.quickAll }].map(({ key, label }) => (
-                <a key={label} href="#shop" onClick={(e) => { e.preventDefault(); onQuickLink(key); }} className="uline" style={{ color: "var(--muted)", textDecoration: "none", fontSize: 14, padding: "5px 0" }}>{label}</a>
+              {CATEGORIES.map((c) => (
+                <a key={c} href="#shop" onClick={(e) => { e.preventDefault(); onQuickLink(c); }} className="uline" style={{ color: "var(--muted)", textDecoration: "none", fontSize: 14, padding: "5px 0" }}>{t.cat[c]}</a>
               ))}
             </div>
           </div>
