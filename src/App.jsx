@@ -26,7 +26,7 @@ const scrollToTop = () => {
   });
 };
 
-const HERO_VIDEO_URL = "https://res.cloudinary.com/dwhdnp0rl/video/upload/v1782642247/IMG_1275_ooocde.mp4";
+const HERO_VIDEO_URL = "https://res.cloudinary.com/dwhdnp0rl/video/upload/v1785859064/IMG_1898_dg3qii.mp4";
 
 const LINKS = {
   tiktok:    "https://www.tiktok.com/@la_store1_?is_from_webapp=1&sender_device=pc",
@@ -460,27 +460,16 @@ function HeroVideo({ src }) {
     if (!src) return;
     const v = ref.current; if (!v) return;
     const tryPlay = () => { const p = v.play && v.play(); if (p && p.catch) p.catch(() => {}); };
-    // Jump to the second half of the clip, then reveal + play.
-    const seekToHalf = () => {
-      if (v.duration && isFinite(v.duration) && v.currentTime < v.duration / 2) {
-        try { v.currentTime = v.duration / 2; } catch { /* ignore */ }
-      }
-    };
-    const onFrame = () => { seekToHalf(); setReady(true); tryPlay(); };
-    // Loop back to the midpoint instead of the very start.
-    const onLoop = () => { seekToHalf(); };
-    v.addEventListener("loadedmetadata", seekToHalf);
+    // As soon as the very first frame is decoded, reveal it and start playing.
+    const onFrame = () => { setReady(true); tryPlay(); };
     v.addEventListener("loadeddata", onFrame);
     v.addEventListener("canplay", onFrame);
-    v.addEventListener("seeked", onLoop);
     tryPlay();
     const kick = () => tryPlay();
     ["pointerdown", "touchstart", "scroll", "keydown"].forEach((e) => window.addEventListener(e, kick, { once: true }));
     return () => {
-      v.removeEventListener("loadedmetadata", seekToHalf);
       v.removeEventListener("loadeddata", onFrame);
       v.removeEventListener("canplay", onFrame);
-      v.removeEventListener("seeked", onLoop);
       ["pointerdown", "touchstart", "scroll", "keydown"].forEach((e) => window.removeEventListener(e, kick));
     };
   }, [src]);
